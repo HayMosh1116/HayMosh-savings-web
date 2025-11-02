@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Savings App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module">
+    // ===== Firebase Config =====
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyDOqmFVo-JOX6hqWI589fahLowc8Q-U1ys",
+  authDomain: "my-savings-project.firebaseapp.com",
+  projectId: "my-savings-project",
+  storageBucket: "my-savings-project.firebasestorage.app",
+  messagingSenderId: "937401906347",
+  appId: "1:937401906347:web:9da64a58dd636278e7b3ee"
+};
+
+    const app = initializeApp(firebaseConfig);
+    window.auth = getAuth(app);
+    window.provider = new GoogleAuthProvider();
+    window.db = getFirestore(app);
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="welcome-text">Welcome to My Savings App</h1>
+    <p id="date"></p>
+
+    <div class="auth">
+      <button id="google-login">Sign in with Google</button>
+      <button id="logout" style="display:none;">Logout</button>
+    </div>
+
+    <div class="balance-section">
+      <h2>Current Balance</h2>
+      <div id="balance">₦0</div>
+    </div>
+
+    <div class="progress-container">
+      <div class="circle">
+        <div class="percent-text">
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+      <p id="goal-text">Goal: ₦100,000</p>
+    </div>
+
+    <div class="input-section">
+      <input type="number" id="amount" placeholder="Enter amount (₦)" />
+      <div class="buttons">
+        <button id="save-btn">💰 Save</button>
+        <button id="withdraw-btn">💸 Withdraw</button>
+        <button id="reset-btn">♻️ Reset</button>
+      </div>
+    </div>
+
+    <div class="goal-section">
+      <input type="number" id="goal-input" placeholder="Set new goal (₦)" />
+      <button id="set-goal-btn">Set Goal</button>
+    </div>
+
+    <div class="history">
+      <h3>Transaction History</h3>
+      <ul id="history-list"></ul>
+    </div>
+  </div>
+
+  <!-- Main logic -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
