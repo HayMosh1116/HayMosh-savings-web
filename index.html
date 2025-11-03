@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Savings App</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Savings Tracker</title>
+  <link rel="stylesheet" href="style.css">
   <script type="module">
     // ===== Firebase Config =====
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
@@ -24,54 +24,59 @@
     window.auth = getAuth(app);
     window.provider = new GoogleAuthProvider();
     window.db = getFirestore(app);
-  </script>
+  </script> 
 </head>
-
 <body>
   <div class="container">
-    <h1 id="welcome-text">Welcome to My Savings App</h1>
-    <p id="date"></p>
 
-    <div class="auth">
-      <button id="google-login">Sign in with Google</button>
-      <button id="logout" style="display:none;">Logout</button>
+    <!-- ===== AUTH BAR ===== -->
+    <div class="auth-bar">
+      <div class="user-info" id="user-info" style="display:none;">
+        <img id="user-photo" alt="User Photo">
+        <span id="user-name"></span>
+        <button id="logout-btn">Logout</button>
+      </div>
+      <button id="login-btn" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+        Sign in with Google
+      </button>
     </div>
 
-    <div class="balance-section">
-      <h2>Current Balance</h2>
-      <div id="balance">₦0</div>
-    </div>
+    <!-- Welcome Banner -->
+    <div id="welcome-banner" class="welcome-banner"></div>
 
-    <div class="progress-container">
+    <!-- ===== MAIN SAVINGS CARD ===== -->
+    <div class="card">
+      <h1>💰 My Savings Tracker</h1>
+      <p id="date"></p>
+
       <div class="circle">
-        <div class="percent-text">
-          <span id="progress-percent">0%</span>
+        <div class="inner-circle">
+          <h2 id="progress-percent">0%</h2>
+          <p id="goal-text">Goal: ₦100,000</p>
         </div>
       </div>
-      <p id="goal-text">Goal: ₦100,000</p>
-    </div>
 
-    <div class="input-section">
-      <input type="number" id="amount" placeholder="Enter amount (₦)" />
+      <h3 id="balance">₦0</h3>
+
+      <input type="number" id="amount" placeholder="Enter amount">
       <div class="buttons">
-        <button id="save-btn">💰 Save</button>
-        <button id="withdraw-btn">💸 Withdraw</button>
-        <button id="reset-btn">♻️ Reset</button>
+        <button id="save-btn">Save</button>
+        <button id="withdraw-btn">Withdraw</button>
+        <button id="reset-btn">Reset</button>
       </div>
-    </div>
 
-    <div class="goal-section">
-      <input type="number" id="goal-input" placeholder="Set new goal (₦)" />
-      <button id="set-goal-btn">Set Goal</button>
-    </div>
+      <div class="goal-section">
+        <input type="number" id="goal-input" placeholder="Set new goal">
+        <button id="set-goal-btn">Set Goal</button>
+      </div>
 
-    <div class="history">
       <h3>Transaction History</h3>
       <ul id="history-list"></ul>
     </div>
+
   </div>
 
-  <!-- Main logic -->
   <script type="module" src="script.js"></script>
 </body>
 </html>
